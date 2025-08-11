@@ -15,8 +15,15 @@ export function Badge({ children, tone = "orange" }: { children: React.ReactNode
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`rounded-2xl shadow-sm border border-neutral-200 bg-white ${className}`}>{children}</div>;
 }
-export function Section({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <section className={`w-full max-w-7xl mx-auto px-4 md:px-8 ${className}`}>{children}</section>;
+type SectionProps = React.HTMLAttributes<HTMLElement> & { children: React.ReactNode };
+
+export function Section({ children, className = "", ...props }: SectionProps) {
+  return (
+    <section {...props} className={`w-full max-w-7xl mx-auto px-4 md:px-8 ${className}`}>
+      {children}
+    </section>
+  );
+}
 }
 export function Feature({ icon, title, text }: any) {
   return (
