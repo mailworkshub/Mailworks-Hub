@@ -23,7 +23,7 @@ export function Card({ children, className = "" }: { children: React.ReactNode; 
   return <div className={`rounded-2xl shadow-sm border border-neutral-200 bg-white ${className}`}>{children}</div>;
 }
 
-// Accepts id/role/aria-* etc.
+// Accepts id/role/aria-*
 type SectionProps = React.HTMLAttributes<HTMLElement> & { children: React.ReactNode; className?: string };
 export function Section({ children, className = "", ...props }: SectionProps) {
   return (
