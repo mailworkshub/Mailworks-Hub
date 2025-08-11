@@ -1,25 +1,30 @@
 "use client";
 import React from "react";
-import { Check, Package, Shield, Truck, ScanLine, CreditCard, Settings, Building2, Globe2, Smartphone, BadgeCheck, Cpu, Lock, Users, ArrowRight, Handshake, FileDigit, TrendingUp, Sparkles, LayoutDashboard, Filter, Plus, Search, Coins, User, Home, Boxes, ChartLine, BarChart3, Activity, FileText, Printer, Wrench } from "lucide-react";
+import {
+  Check, Package, Shield, Truck, ScanLine, CreditCard, Settings, Building2, Globe2, Smartphone,
+  BadgeCheck, Cpu, Lock, Users, ArrowRight, Handshake, FileDigit, TrendingUp, Sparkles,
+  LayoutDashboard, Filter, Plus, Search, Coins, User, Home, Boxes, ChartLine, BarChart3,
+  Activity, FileText, Printer, Wrench
+} from "lucide-react";
 
+// Design tokens
 export const brand = { orange: "#ff7a00", purple: "#6b4eff", dark: "#0f0f14", light: "#ffffff", gray: "#f6f7fb" };
 export const pill = "rounded-full px-3 py-1 text-xs font-medium";
 export const h1c = "text-4xl md:text-6xl font-extrabold tracking-tight";
 export const h2c = "text-2xl md:text-4xl font-bold tracking-tight";
-export const pc = "text-base md:text-lg text-neutral-600";
+export const pc  = "text-base md:text-lg text-neutral-600";
 
 export function Badge({ children, tone = "orange" }: { children: React.ReactNode; tone?: "orange" | "purple" }) {
   const bg = tone === "orange" ? brand.orange : brand.purple;
-  return <span className={`${pill}`} style={{ background: bg, color: brand.light }}>{children}</span>;
+  return <span className={pill} style={{ background: bg, color: brand.light }}>{children}</span>;
 }
+
 export function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`rounded-2xl shadow-sm border border-neutral-200 bg-white ${className}`}>{children}</div>;
 }
-type SectionProps = React.HTMLAttributes<HTMLElement> & {
-  children: React.ReactNode;
-  className?: string;
-};
 
+// Accepts id/role/aria-* etc.
+type SectionProps = React.HTMLAttributes<HTMLElement> & { children: React.ReactNode; className?: string };
 export function Section({ children, className = "", ...props }: SectionProps) {
   return (
     <section {...props} className={`w-full max-w-7xl mx-auto px-4 md:px-8 ${className}`}>
@@ -27,24 +32,47 @@ export function Section({ children, className = "", ...props }: SectionProps) {
     </section>
   );
 }
-export function Feature({ icon, title, text }: any) {
+
+export function Feature({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
   return (
     <div className="flex gap-4 items-start">
-      <div className="flex items-center justify-center w-10 h-10 rounded-xl" style={{ background: `${brand.purple}10`, color: brand.purple }}>{icon}</div>
-      <div><h4 className="font-semibold text-neutral-900">{title}</h4><p className="text-neutral-600 text-sm">{text}</p></div>
+      <div className="flex items-center justify-center w-10 h-10 rounded-xl" style={{ background: `${brand.purple}10`, color: brand.purple }}>
+        {icon}
+      </div>
+      <div>
+        <h4 className="font-semibold text-neutral-900">{title}</h4>
+        <p className="text-neutral-600 text-sm">{text}</p>
+      </div>
     </div>
   );
 }
-export function PlanCard({ p }: any) {
+
+export function PlanCard({ p }: { p: any }) {
   return (
     <Card className={`p-6 flex flex-col ${p.popular ? "ring-2" : ""}`}>
-      <div className="flex items-center justify-between mb-4"><h3 className="text-xl font-bold">{p.name}</h3>{p.popular && <Badge tone="purple">Most Popular</Badge>}</div>
-      <div className="mb-4"><div className="text-4xl font-extrabold">${p.price}<span className="text-base font-medium">/mo</span></div><div className="text-sm text-neutral-600">{p.tag}</div></div>
-      <ul className="space-y-2 text-sm flex-1">{p.features.map((f: string) => (<li key={f} className="flex items-start gap-2"><Check className="w-4 h-4 mt-0.5" style={{ color: brand.orange }} /><span>{f}</span></li>))}</ul>
-      <a href="#contact" className="mt-6 w-full rounded-xl py-3 font-semibold text-center" style={{ background: brand.orange, color: brand.light }}>Get Started</a>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-bold">{p.name}</h3>
+        {p.popular && <Badge tone="purple">Most Popular</Badge>}
+      </div>
+      <div className="mb-4">
+        <div className="text-4xl font-extrabold">${p.price}<span className="text-base font-medium">/mo</span></div>
+        <div className="text-sm text-neutral-600">{p.tag}</div>
+      </div>
+      <ul className="space-y-2 text-sm flex-1">
+        {p.features.map((f: string) => (
+          <li key={f} className="flex items-start gap-2">
+            <Check className="w-4 h-4 mt-0.5" style={{ color: brand.orange }} />
+            <span>{f}</span>
+          </li>
+        ))}
+      </ul>
+      <a href="#contact" className="mt-6 w-full rounded-xl py-3 font-semibold text-center" style={{ background: brand.orange, color: brand.light }}>
+        Get Started
+      </a>
     </Card>
   );
 }
+
 export function MockScreen({ title, subtitle, tint = "purple" }: { title: string; subtitle: string; tint?: "purple" | "orange" }) {
   const color = tint === "purple" ? brand.purple : brand.orange;
   return (
@@ -59,11 +87,22 @@ export function MockScreen({ title, subtitle, tint = "purple" }: { title: string
         <Badge tone={tint}>{subtitle}</Badge>
       </div>
       <div className="p-6 grid md:grid-cols-3 gap-4">
-        {[...Array(6)].map((_, i) => (<div key={i} className="border rounded-xl p-4"><div className="h-24 rounded-lg mb-3" style={{ background: `${color}10` }} /><div className="h-3 w-3/4 rounded-full mb-2" style={{ background: `${color}20` }} /><div className="h-3 w-2/5 rounded-full" style={{ background: `${color}15` }} /></div>))}
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="border rounded-xl p-4">
+            <div className="h-24 rounded-lg mb-3" style={{ background: `${color}10` }} />
+            <div className="h-3 w-3/4 rounded-full mb-2" style={{ background: `${color}20` }} />
+            <div className="h-3 w-2/5 rounded-full" style={{ background: `${color}15` }} />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
+
+function Metric({ label, value }: { label: string; value: string }) {
+  return <Card className="p-4"><div className="text-xs text-neutral-500">{label}</div><div className="text-2xl font-bold">{value}</div></Card>;
+}
+
 export function CustomerDashboardMock() {
   return (
     <div className="grid lg:grid-cols-4 gap-6">
@@ -111,9 +150,7 @@ export function CustomerDashboardMock() {
     </div>
   );
 }
-function Metric({ label, value }: { label: string; value: string }) {
-  return <Card className="p-4"><div className="text-xs text-neutral-500">{label}</div><div className="text-2xl font-bold">{value}</div></Card>;
-}
+
 export function OperatorConsoleMock() {
   return (
     <div className="grid lg:grid-cols-5 gap-6">
