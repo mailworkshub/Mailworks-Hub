@@ -22,12 +22,7 @@
       }
     ],
     "incremental": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    }
+    "baseUrl": "."
   },
   "include": [
     "next-env.d.ts",

@@ -1,17 +1,10 @@
-"use client";
-import React from "react";
-import Link from "next/link";
-import { Section, brand, h2c, CustomerDashboardMock } from "@/components/ui";
-export default function CustomerPage() {
+export default function Page() {
   return (
-    <div className="min-h-screen" style={{ background: `linear-gradient(180deg, ${brand.gray} 0%, #ffffff 60%)` }}>
-      <header className="sticky top-0 z-40 backdrop-blur bg-white/75 border-b border-neutral-200">
-        <Section className="flex items-center justify-between py-3">
-          <Link href="/" className="font-extrabold tracking-tight text-lg">← Mailworks Hub</Link>
-          <div className="text-sm text-neutral-600">Mock dashboard</div>
-        </Section>
-      </header>
-      <Section className="py-10"><h2 className={`${h2c} mb-6`}>Customer Dashboard</h2><CustomerDashboardMock /></Section>
+    <div className="min-h-screen grid place-items-center p-10 text-center">
+      <div>
+        <h1 className="text-3xl font-bold mb-2">Customer Dashboard</h1>
+        <p className="text-neutral-600">Use the nav to explore the site.</p>
+      </div>
     </div>
   );
 }
